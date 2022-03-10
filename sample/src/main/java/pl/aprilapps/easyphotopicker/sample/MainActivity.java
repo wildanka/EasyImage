@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements EasyImage.EasyIma
     protected View galleryButton;
 
     private ImagesAdapter imagesAdapter;
+    private ImageView ivTestUri;
 
     private ArrayList<MediaFile> photos = new ArrayList<>();
 
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements EasyImage.EasyIma
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recycler_view);
+        ivTestUri = findViewById(R.id.iv_test_uri);
         galleryButton = findViewById(R.id.gallery_button);
 
         if (savedInstanceState != null) {
@@ -183,7 +186,9 @@ public class MainActivity extends AppCompatActivity implements EasyImage.EasyIma
             public void onMediaFilesPicked(MediaFile[] imageFiles, MediaSource source) {
                 for (MediaFile imageFile : imageFiles) {
                     Log.d("EasyImage", "Image file returned: " + imageFile.getFile().toString());
+                    Log.d("EasyImage", "Image uri returned: " + imageFile.getUri().toString());
                 }
+                ivTestUri.setImageURI(imageFiles[0].getUri());
                 onPhotosReturned(imageFiles);
             }
 

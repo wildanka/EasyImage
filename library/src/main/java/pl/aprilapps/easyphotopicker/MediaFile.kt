@@ -5,7 +5,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.io.File
 
-data class MediaFile(internal val uri: Uri, val file: File) : Parcelable {
+data class MediaFile(val uri: Uri, val file: File) : Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readParcelable(Uri::class.java.classLoader)!!,
